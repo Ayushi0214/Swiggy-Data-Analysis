@@ -1,0 +1,16 @@
+Dax Measures: 
+
+Revenue:
+Revenue = sumx(orders,orders[price]*orders[quantity])
+
+Revenue of cancelled orders:
+rev_from_cancelled = CALCULATE([revenue],orders[order_status] = "cancelled")
+
+Time of Day:
+time_of_day = 
+
+SWITCH(TRUE(),
+hour(orders[order_time]) < 12,"Morning",
+hour(orders[order_time]) >= 12 && hour(orders[order_time]) < 17,"Afternoon",
+hour(orders[order_time]) >=17 && HOUR(orders[order_time]) <20,"Evening",
+hour(orders[order_time]) >=20 && HOUR(orders[order_time]) <=23 || (orders[order_time]) >= 00 && HOUR(orders[order_time]) <=5 ,"Night")
